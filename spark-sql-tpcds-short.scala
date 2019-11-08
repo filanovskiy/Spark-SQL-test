@@ -15,22 +15,22 @@ val conf = sc.getConf
 // set("spark.sql.autoBroadcastJoinThreshold","2097152")
 sc.stop()
 val customSql = SparkSession.builder.config(conf).enableHiveSupport().getOrCreate()
-customSql.sql("use " + database).show()
-val resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q11.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q12.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q13.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q19.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q1.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q21.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q22.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q24a.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q24b.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q27.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q30.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q93.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q94.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q95.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q96.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q98.sql").mkString).show()}
- resultsDFfromFile = show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q9.sql").mkString).show()}
+customSql.sql("use parq").show()
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q11.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q12.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q13.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q19.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q1.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q21.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q22.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q24a.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q24b.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q27.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q30.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q93.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q94.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q95.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q96.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q98.sql").mkString).show()}
+ show_timing{customSql.sql(scala.io.Source.fromFile("./queries/q9.sql").mkString).show()}
 sys.exit
