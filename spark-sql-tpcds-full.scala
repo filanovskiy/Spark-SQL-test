@@ -10,7 +10,7 @@ import org.apache.spark.sql.SparkSession
  val OPT_HIVE_WAREHOUSE = "spark.sql.warehouse.dir"
  val OPT_HIVE_METASTORE = "hive.metastore.uris"
  val conf = sc.getConf
-//conf.set(OPT_HIVE_METASTORE, "thrift://bdax72bur09node04.us.oracle.com:9083").set(OPT_HIVE_WAREHOUSE, "/user/hive/warehouse/").set("spark.sql.adaptive.enabled","false")
+ conf.set(OPT_HIVE_METASTORE, "thrift://pmtestun1.bmbdcsad1.bmbdcs.oraclevcn.com:9083").set(OPT_HIVE_WAREHOUSE, "/user/hive/warehouse/").set("spark.sql.adaptive.enabled","false")
 //.set("spark.sql.autoBroadcastJoinThreshold","1572864")
 // set("spark.sql.autoBroadcastJoinThreshold","2097152")
 sc.stop()
