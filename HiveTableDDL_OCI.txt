@@ -1,4 +1,4 @@
-create database s3;
+create database oci;
 CREATE EXTERNAL TABLE `customer`(
   `c_customer_sk` bigint, 
   `c_customer_id` string, 
@@ -25,7 +25,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/customer'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/customer'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -55,7 +55,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/customer_address'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/customer_address'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -81,7 +81,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/customer_demographics'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/customer_demographics'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -126,7 +126,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/date_dim'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/date_dim'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -148,7 +148,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/household_demographics'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/household_demographics'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -168,7 +168,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/income_band'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/income_band'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -189,7 +189,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/inventory'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/inventory'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -228,7 +228,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/item'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/item'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -251,7 +251,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/item_marketprices'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/item_marketprices'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'transient_lastDdlTime'='1550896568')
@@ -273,7 +273,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/product_reviews'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/product_reviews'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'transient_lastDdlTime'='1550896579')
@@ -306,7 +306,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/promotion'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/promotion'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -326,7 +326,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/reason'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/reason'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -349,7 +349,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/ship_mode'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/ship_mode'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -395,7 +395,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/store'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/store'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -432,7 +432,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/store_returns'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/store_returns'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -472,7 +472,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/store_sales'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/store_sales'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -499,7 +499,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/time_dim'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/time_dim'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -530,7 +530,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/warehouse'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/warehouse'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -553,7 +553,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_clickstreams'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/web_clickstreams'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'transient_lastDdlTime'='1550897257')
@@ -581,7 +581,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_page'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/web_page'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -622,7 +622,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_returns'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/web_returns'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -673,7 +673,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_sales'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/web_sales'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -716,7 +716,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_site'
+  'oci://TCPDSPARQ/user/hive/warehouse/parq.db/web_site'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
