@@ -19,14 +19,9 @@ CREATE EXTERNAL TABLE customer(
   c_login string, 
   c_email_address string, 
   c_last_review_date string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/customer'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/customer'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -49,14 +44,9 @@ CREATE EXTERNAL TABLE customer_address(
   ca_country string, 
   ca_gmt_offset double, 
   ca_location_type string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/customer_address'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/customer_address'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -75,14 +65,9 @@ CREATE EXTERNAL TABLE customer_demographics(
   cd_dep_count int, 
   cd_dep_employed_count int, 
   cd_dep_college_count int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/customer_demographics'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/customer_demographics'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -120,14 +105,9 @@ CREATE EXTERNAL TABLE date_dim(
   d_current_month string, 
   d_current_quarter string, 
   d_current_year string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/date_dim'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/date_dim'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -142,14 +122,9 @@ CREATE EXTERNAL TABLE household_demographics(
   hd_buy_potential string, 
   hd_dep_count int, 
   hd_vehicle_count int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/household_demographics'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/household_demographics'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -162,14 +137,9 @@ CREATE EXTERNAL TABLE income_band(
   ib_income_band_sk bigint, 
   ib_lower_bound int, 
   ib_upper_bound int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/income_band'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/income_band'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -183,14 +153,9 @@ CREATE EXTERNAL TABLE inventory(
   inv_item_sk bigint, 
   inv_warehouse_sk bigint, 
   inv_quantity_on_hand int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/inventory'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/inventory'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -222,14 +187,9 @@ CREATE EXTERNAL TABLE item(
   i_container string, 
   i_manager_id int, 
   i_product_name string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/item'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/item'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -245,14 +205,9 @@ CREATE EXTERNAL TABLE item_marketprices(
   imp_competitor_price double, 
   imp_start_date bigint, 
   imp_end_date bigint)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/item_marketprices'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/item_marketprices'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'transient_lastDdlTime'='1550896568');
@@ -267,14 +222,9 @@ CREATE EXTERNAL TABLE product_reviews(
   pr_user_sk bigint, 
   pr_order_sk bigint, 
   pr_review_content string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/product_reviews'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/product_reviews'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'transient_lastDdlTime'='1550896579');
@@ -300,14 +250,9 @@ CREATE EXTERNAL TABLE promotion(
   p_channel_details string, 
   p_purpose string, 
   p_discount_active string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/promotion'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/promotion'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -320,14 +265,9 @@ CREATE EXTERNAL TABLE reason(
   r_reason_sk bigint, 
   r_reason_id string, 
   r_reason_desc string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/reason'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/reason'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -343,14 +283,9 @@ CREATE EXTERNAL TABLE ship_mode(
   sm_code string, 
   sm_carrier string, 
   sm_contract string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/ship_mode'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/ship_mode'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -389,14 +324,9 @@ CREATE EXTERNAL TABLE store(
   s_country string, 
   s_gmt_offset double, 
   s_tax_precentage double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/store'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/store'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -426,14 +356,9 @@ CREATE EXTERNAL TABLE store_returns(
   sr_reversed_charge double, 
   sr_store_credit double, 
   sr_net_loss double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/store_returns'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/store_returns'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -466,14 +391,9 @@ CREATE EXTERNAL TABLE store_sales(
   ss_net_paid double, 
   ss_net_paid_inc_tax double, 
   ss_net_profit double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/store_sales'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/store_sales'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -493,14 +413,9 @@ CREATE EXTERNAL TABLE time_dim(
   t_shift string, 
   t_sub_shift string, 
   t_meal_time string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/time_dim'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/time_dim'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -524,14 +439,9 @@ CREATE EXTERNAL TABLE warehouse(
   w_zip string, 
   w_country string, 
   w_gmt_offset double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/warehouse'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/warehouse'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -547,14 +457,9 @@ CREATE EXTERNAL TABLE web_clickstreams(
   wcs_item_sk bigint, 
   wcs_web_page_sk bigint, 
   wcs_user_sk bigint)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/web_clickstreams'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_clickstreams'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'transient_lastDdlTime'='1550897257');
@@ -575,14 +480,9 @@ CREATE EXTERNAL TABLE web_page(
   wp_link_count int, 
   wp_image_count int, 
   wp_max_ad_count int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/web_page'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_page'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -616,14 +516,9 @@ CREATE EXTERNAL TABLE web_returns(
   wr_reversed_charge double, 
   wr_account_credit double, 
   wr_net_loss double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/web_returns'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_returns'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -667,14 +562,9 @@ CREATE EXTERNAL TABLE web_sales(
   ws_net_paid_inc_ship double, 
   ws_net_paid_inc_ship_tax double, 
   ws_net_profit double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/web_sales'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_sales'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
@@ -710,14 +600,9 @@ CREATE EXTERNAL TABLE web_site(
   web_country string, 
   web_gmt_offset double, 
   web_tax_percentage double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSCSV3/user/hive/warehouse/parq.db/web_site'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_site'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
