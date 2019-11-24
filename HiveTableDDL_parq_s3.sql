@@ -1,3 +1,4 @@
+drop database parq_s3;
 create database parq_s3;
 use parq_s3;
 CREATE EXTERNAL TABLE customer(

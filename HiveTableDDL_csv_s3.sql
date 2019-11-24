@@ -1,5 +1,6 @@
-create database s3;
-use s3;
+drop database csv_s3;
+create database csv_s3;
+use csv_s3;
 CREATE EXTERNAL TABLE customer(
   c_customer_sk bigint, 
   c_customer_id string, 
@@ -19,20 +20,15 @@ CREATE EXTERNAL TABLE customer(
   c_login string, 
   c_email_address string, 
   c_last_review_date string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/customer'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/customer'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"c_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"c_customer_id","type":"string","nullable":true,"metadata":{}},{"name":"c_current_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"c_current_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"c_current_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"c_first_shipto_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"c_first_sales_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"c_salutation","type":"string","nullable":true,"metadata":{}},{"name":"c_first_name","type":"string","nullable":true,"metadata":{}},{"name":"c_last_name","type":"string","nullable":true,"metadata":{}},{"name":"c_preferred_cust_flag","type":"string","nullable":true,"metadata":{}},{"name":"c_birth_day","type":"integer","nullable":true,"metadata":{}},{"name":"c_birth_month","type":"integer","nullable":true,"metadata":{}},{"name":"c_birth_year","type":"integer","nullable":true,"metadata":{}},{"name":"c_birth_country","type":"string","nullable":true,"metadata":{}},{"name":"c_login","type":"string","nullable":true,"metadata":{}},{"name":"c_email_address","type":"string","nullable":true,"metadata":{}},{"name":"c_last_review_date","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550906713')
+  'transient_lastDdlTime'='1550906713');
 
 
 CREATE EXTERNAL TABLE customer_address(
@@ -49,20 +45,15 @@ CREATE EXTERNAL TABLE customer_address(
   ca_country string, 
   ca_gmt_offset double, 
   ca_location_type string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/customer_address'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/customer_address'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"ca_address_sk","type":"long","nullable":true,"metadata":{}},{"name":"ca_address_id","type":"string","nullable":true,"metadata":{}},{"name":"ca_street_number","type":"string","nullable":true,"metadata":{}},{"name":"ca_street_name","type":"string","nullable":true,"metadata":{}},{"name":"ca_street_type","type":"string","nullable":true,"metadata":{}},{"name":"ca_suite_number","type":"string","nullable":true,"metadata":{}},{"name":"ca_city","type":"string","nullable":true,"metadata":{}},{"name":"ca_county","type":"string","nullable":true,"metadata":{}},{"name":"ca_state","type":"string","nullable":true,"metadata":{}},{"name":"ca_zip","type":"string","nullable":true,"metadata":{}},{"name":"ca_country","type":"string","nullable":true,"metadata":{}},{"name":"ca_gmt_offset","type":"double","nullable":true,"metadata":{}},{"name":"ca_location_type","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896507')
+  'transient_lastDdlTime'='1550896507');
 
 
 CREATE EXTERNAL TABLE customer_demographics(
@@ -75,20 +66,15 @@ CREATE EXTERNAL TABLE customer_demographics(
   cd_dep_count int, 
   cd_dep_employed_count int, 
   cd_dep_college_count int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/customer_demographics'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/customer_demographics'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"cd_demo_sk","type":"long","nullable":true,"metadata":{}},{"name":"cd_gender","type":"string","nullable":true,"metadata":{}},{"name":"cd_marital_status","type":"string","nullable":true,"metadata":{}},{"name":"cd_education_status","type":"string","nullable":true,"metadata":{}},{"name":"cd_purchase_estimate","type":"integer","nullable":true,"metadata":{}},{"name":"cd_credit_rating","type":"string","nullable":true,"metadata":{}},{"name":"cd_dep_count","type":"integer","nullable":true,"metadata":{}},{"name":"cd_dep_employed_count","type":"integer","nullable":true,"metadata":{}},{"name":"cd_dep_college_count","type":"integer","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896514')
+  'transient_lastDdlTime'='1550896514');
 
 
 CREATE EXTERNAL TABLE date_dim(
@@ -120,20 +106,15 @@ CREATE EXTERNAL TABLE date_dim(
   d_current_month string, 
   d_current_quarter string, 
   d_current_year string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/date_dim'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/date_dim'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"d_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"d_date_id","type":"string","nullable":true,"metadata":{}},{"name":"d_date","type":"string","nullable":true,"metadata":{}},{"name":"d_month_seq","type":"integer","nullable":true,"metadata":{}},{"name":"d_week_seq","type":"integer","nullable":true,"metadata":{}},{"name":"d_quarter_seq","type":"integer","nullable":true,"metadata":{}},{"name":"d_year","type":"integer","nullable":true,"metadata":{}},{"name":"d_dow","type":"integer","nullable":true,"metadata":{}},{"name":"d_moy","type":"integer","nullable":true,"metadata":{}},{"name":"d_dom","type":"integer","nullable":true,"metadata":{}},{"name":"d_qoy","type":"integer","nullable":true,"metadata":{}},{"name":"d_fy_year","type":"integer","nullable":true,"metadata":{}},{"name":"d_fy_quarter_seq","type":"integer","nullable":true,"metadata":{}},{"name":"d_fy_week_seq","type":"integer","nullable":true,"metadata":{}},{"name":"d_day_name","type":"string","nullable":true,"metadata":{}},{"name":"d_quarter_name","type":"string","nullable":true,"metadata":{}},{"name":"d_holiday","type":"string","nullable":true,"metadata":{}},{"name":"d_weekend","type":"string","nullable":true,"metadata":{}},{"name":"d_following_holiday","type":"string","nullable":true,"metadata":{}},{"name":"d_first_dom","type":"integer","nullable":true,"metadata":{}},{"name":"d_last_dom","type":"integer","nullable":true,"metadata":{}},{"name":"d_same_day_ly","type":"integer","nullable":true,"metadata":{}},{"name":"d_same_day_lq","type":"integer","nullable":true,"metadata":{}},{"name":"d_current_day","type":"string","nullable":true,"metadata":{}},{"name":"d_current_week","type":"string","nullable":true,"metadata":{}},{"name":"d_current_month","type":"string","nullable":true,"metadata":{}},{"name":"d_current_quarter","type":"string","nullable":true,"metadata":{}},{"name":"d_current_year","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896514')
+  'transient_lastDdlTime'='1550896514');
 
 
 CREATE EXTERNAL TABLE household_demographics(
@@ -142,40 +123,30 @@ CREATE EXTERNAL TABLE household_demographics(
   hd_buy_potential string, 
   hd_dep_count int, 
   hd_vehicle_count int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/household_demographics'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/household_demographics'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"hd_demo_sk","type":"long","nullable":true,"metadata":{}},{"name":"hd_income_band_sk","type":"long","nullable":true,"metadata":{}},{"name":"hd_buy_potential","type":"string","nullable":true,"metadata":{}},{"name":"hd_dep_count","type":"integer","nullable":true,"metadata":{}},{"name":"hd_vehicle_count","type":"integer","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896515')
+  'transient_lastDdlTime'='1550896515');
 
 
 CREATE EXTERNAL TABLE income_band(
   ib_income_band_sk bigint, 
   ib_lower_bound int, 
   ib_upper_bound int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/income_band'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/income_band'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"ib_income_band_sk","type":"long","nullable":true,"metadata":{}},{"name":"ib_lower_bound","type":"integer","nullable":true,"metadata":{}},{"name":"ib_upper_bound","type":"integer","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896519')
+  'transient_lastDdlTime'='1550896519');
 
 
 CREATE EXTERNAL TABLE inventory(
@@ -183,20 +154,15 @@ CREATE EXTERNAL TABLE inventory(
   inv_item_sk bigint, 
   inv_warehouse_sk bigint, 
   inv_quantity_on_hand int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/inventory'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/inventory'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"inv_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"inv_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"inv_warehouse_sk","type":"long","nullable":true,"metadata":{}},{"name":"inv_quantity_on_hand","type":"integer","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896559')
+  'transient_lastDdlTime'='1550896559');
 
 
 CREATE EXTERNAL TABLE item(
@@ -222,20 +188,15 @@ CREATE EXTERNAL TABLE item(
   i_container string, 
   i_manager_id int, 
   i_product_name string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/item'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/item'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"i_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"i_item_id","type":"string","nullable":true,"metadata":{}},{"name":"i_rec_start_date","type":"string","nullable":true,"metadata":{}},{"name":"i_rec_end_date","type":"string","nullable":true,"metadata":{}},{"name":"i_item_desc","type":"string","nullable":true,"metadata":{}},{"name":"i_current_price","type":"double","nullable":true,"metadata":{}},{"name":"i_wholesale_cost","type":"double","nullable":true,"metadata":{}},{"name":"i_brand_id","type":"integer","nullable":true,"metadata":{}},{"name":"i_brand","type":"string","nullable":true,"metadata":{}},{"name":"i_class_id","type":"integer","nullable":true,"metadata":{}},{"name":"i_class","type":"string","nullable":true,"metadata":{}},{"name":"i_category_id","type":"integer","nullable":true,"metadata":{}},{"name":"i_category","type":"string","nullable":true,"metadata":{}},{"name":"i_manufact_id","type":"integer","nullable":true,"metadata":{}},{"name":"i_manufact","type":"string","nullable":true,"metadata":{}},{"name":"i_size","type":"string","nullable":true,"metadata":{}},{"name":"i_formulation","type":"string","nullable":true,"metadata":{}},{"name":"i_color","type":"string","nullable":true,"metadata":{}},{"name":"i_units","type":"string","nullable":true,"metadata":{}},{"name":"i_container","type":"string","nullable":true,"metadata":{}},{"name":"i_manager_id","type":"integer","nullable":true,"metadata":{}},{"name":"i_product_name","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896562')
+  'transient_lastDdlTime'='1550896562');
 
 
 CREATE EXTERNAL TABLE item_marketprices(
@@ -245,17 +206,12 @@ CREATE EXTERNAL TABLE item_marketprices(
   imp_competitor_price double, 
   imp_start_date bigint, 
   imp_end_date bigint)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/item_marketprices'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/item_marketprices'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
-  'transient_lastDdlTime'='1550896568')
+  'transient_lastDdlTime'='1550896568');
 
 
 CREATE EXTERNAL TABLE product_reviews(
@@ -267,17 +223,12 @@ CREATE EXTERNAL TABLE product_reviews(
   pr_user_sk bigint, 
   pr_order_sk bigint, 
   pr_review_content string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/product_reviews'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/product_reviews'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
-  'transient_lastDdlTime'='1550896579')
+  'transient_lastDdlTime'='1550896579');
 
 
 CREATE EXTERNAL TABLE promotion(
@@ -300,40 +251,30 @@ CREATE EXTERNAL TABLE promotion(
   p_channel_details string, 
   p_purpose string, 
   p_discount_active string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/promotion'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/promotion'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"p_promo_sk","type":"long","nullable":true,"metadata":{}},{"name":"p_promo_id","type":"string","nullable":true,"metadata":{}},{"name":"p_start_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"p_end_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"p_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"p_cost","type":"double","nullable":true,"metadata":{}},{"name":"p_response_target","type":"integer","nullable":true,"metadata":{}},{"name":"p_promo_name","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_dmail","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_email","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_catalog","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_tv","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_radio","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_press","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_event","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_demo","type":"string","nullable":true,"metadata":{}},{"name":"p_channel_details","type":"string","nullable":true,"metadata":{}},{"name":"p_purpose","type":"string","nullable":true,"metadata":{}},{"name":"p_discount_active","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896586')
+  'transient_lastDdlTime'='1550896586');
 
 
 CREATE EXTERNAL TABLE reason(
   r_reason_sk bigint, 
   r_reason_id string, 
   r_reason_desc string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/reason'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/reason'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"r_reason_sk","type":"long","nullable":true,"metadata":{}},{"name":"r_reason_id","type":"string","nullable":true,"metadata":{}},{"name":"r_reason_desc","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896591')
+  'transient_lastDdlTime'='1550896591');
 
 
 CREATE EXTERNAL TABLE ship_mode(
@@ -343,20 +284,15 @@ CREATE EXTERNAL TABLE ship_mode(
   sm_code string, 
   sm_carrier string, 
   sm_contract string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/ship_mode'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/ship_mode'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"sm_ship_mode_sk","type":"long","nullable":true,"metadata":{}},{"name":"sm_ship_mode_id","type":"string","nullable":true,"metadata":{}},{"name":"sm_type","type":"string","nullable":true,"metadata":{}},{"name":"sm_code","type":"string","nullable":true,"metadata":{}},{"name":"sm_carrier","type":"string","nullable":true,"metadata":{}},{"name":"sm_contract","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896597')
+  'transient_lastDdlTime'='1550896597');
 
 
 CREATE EXTERNAL TABLE store(
@@ -389,20 +325,15 @@ CREATE EXTERNAL TABLE store(
   s_country string, 
   s_gmt_offset double, 
   s_tax_precentage double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/store'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/store'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"s_store_sk","type":"long","nullable":true,"metadata":{}},{"name":"s_store_id","type":"string","nullable":true,"metadata":{}},{"name":"s_rec_start_date","type":"string","nullable":true,"metadata":{}},{"name":"s_rec_end_date","type":"string","nullable":true,"metadata":{}},{"name":"s_closed_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"s_store_name","type":"string","nullable":true,"metadata":{}},{"name":"s_number_employees","type":"integer","nullable":true,"metadata":{}},{"name":"s_floor_space","type":"integer","nullable":true,"metadata":{}},{"name":"s_hours","type":"string","nullable":true,"metadata":{}},{"name":"s_manager","type":"string","nullable":true,"metadata":{}},{"name":"s_market_id","type":"integer","nullable":true,"metadata":{}},{"name":"s_geography_class","type":"string","nullable":true,"metadata":{}},{"name":"s_market_desc","type":"string","nullable":true,"metadata":{}},{"name":"s_market_manager","type":"string","nullable":true,"metadata":{}},{"name":"s_division_id","type":"integer","nullable":true,"metadata":{}},{"name":"s_division_name","type":"string","nullable":true,"metadata":{}},{"name":"s_company_id","type":"integer","nullable":true,"metadata":{}},{"name":"s_company_name","type":"string","nullable":true,"metadata":{}},{"name":"s_street_number","type":"string","nullable":true,"metadata":{}},{"name":"s_street_name","type":"string","nullable":true,"metadata":{}},{"name":"s_street_type","type":"string","nullable":true,"metadata":{}},{"name":"s_suite_number","type":"string","nullable":true,"metadata":{}},{"name":"s_city","type":"string","nullable":true,"metadata":{}},{"name":"s_county","type":"string","nullable":true,"metadata":{}},{"name":"s_state","type":"string","nullable":true,"metadata":{}},{"name":"s_zip","type":"string","nullable":true,"metadata":{}},{"name":"s_country","type":"string","nullable":true,"metadata":{}},{"name":"s_gmt_offset","type":"double","nullable":true,"metadata":{}},{"name":"s_tax_precentage","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896598')
+  'transient_lastDdlTime'='1550896598');
 
 
 CREATE EXTERNAL TABLE store_returns(
@@ -426,20 +357,15 @@ CREATE EXTERNAL TABLE store_returns(
   sr_reversed_charge double, 
   sr_store_credit double, 
   sr_net_loss double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/store_returns'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/store_returns'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"sr_returned_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_return_time_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_store_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_reason_sk","type":"long","nullable":true,"metadata":{}},{"name":"sr_ticket_number","type":"long","nullable":true,"metadata":{}},{"name":"sr_return_quantity","type":"integer","nullable":true,"metadata":{}},{"name":"sr_return_amt","type":"double","nullable":true,"metadata":{}},{"name":"sr_return_tax","type":"double","nullable":true,"metadata":{}},{"name":"sr_return_amt_inc_tax","type":"double","nullable":true,"metadata":{}},{"name":"sr_fee","type":"double","nullable":true,"metadata":{}},{"name":"sr_return_ship_cost","type":"double","nullable":true,"metadata":{}},{"name":"sr_refunded_cash","type":"double","nullable":true,"metadata":{}},{"name":"sr_reversed_charge","type":"double","nullable":true,"metadata":{}},{"name":"sr_store_credit","type":"double","nullable":true,"metadata":{}},{"name":"sr_net_loss","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896622')
+  'transient_lastDdlTime'='1550896622');
 
 
 CREATE EXTERNAL TABLE store_sales(
@@ -466,20 +392,15 @@ CREATE EXTERNAL TABLE store_sales(
   ss_net_paid double, 
   ss_net_paid_inc_tax double, 
   ss_net_profit double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/store_sales'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/store_sales'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"ss_sold_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_sold_time_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_store_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_promo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ss_ticket_number","type":"long","nullable":true,"metadata":{}},{"name":"ss_quantity","type":"integer","nullable":true,"metadata":{}},{"name":"ss_wholesale_cost","type":"double","nullable":true,"metadata":{}},{"name":"ss_list_price","type":"double","nullable":true,"metadata":{}},{"name":"ss_sales_price","type":"double","nullable":true,"metadata":{}},{"name":"ss_ext_discount_amt","type":"double","nullable":true,"metadata":{}},{"name":"ss_ext_sales_price","type":"double","nullable":true,"metadata":{}},{"name":"ss_ext_wholesale_cost","type":"double","nullable":true,"metadata":{}},{"name":"ss_ext_list_price","type":"double","nullable":true,"metadata":{}},{"name":"ss_ext_tax","type":"double","nullable":true,"metadata":{}},{"name":"ss_coupon_amt","type":"double","nullable":true,"metadata":{}},{"name":"ss_net_paid","type":"double","nullable":true,"metadata":{}},{"name":"ss_net_paid_inc_tax","type":"double","nullable":true,"metadata":{}},{"name":"ss_net_profit","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896823')
+  'transient_lastDdlTime'='1550896823');
 
 
 CREATE EXTERNAL TABLE time_dim(
@@ -493,20 +414,15 @@ CREATE EXTERNAL TABLE time_dim(
   t_shift string, 
   t_sub_shift string, 
   t_meal_time string)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/time_dim'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/time_dim'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"t_time_sk","type":"long","nullable":true,"metadata":{}},{"name":"t_time_id","type":"string","nullable":true,"metadata":{}},{"name":"t_time","type":"integer","nullable":true,"metadata":{}},{"name":"t_hour","type":"integer","nullable":true,"metadata":{}},{"name":"t_minute","type":"integer","nullable":true,"metadata":{}},{"name":"t_second","type":"integer","nullable":true,"metadata":{}},{"name":"t_am_pm","type":"string","nullable":true,"metadata":{}},{"name":"t_shift","type":"string","nullable":true,"metadata":{}},{"name":"t_sub_shift","type":"string","nullable":true,"metadata":{}},{"name":"t_meal_time","type":"string","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896829')
+  'transient_lastDdlTime'='1550896829');
 
 
 CREATE EXTERNAL TABLE warehouse(
@@ -524,20 +440,15 @@ CREATE EXTERNAL TABLE warehouse(
   w_zip string, 
   w_country string, 
   w_gmt_offset double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/warehouse'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/warehouse'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"w_warehouse_sk","type":"long","nullable":true,"metadata":{}},{"name":"w_warehouse_id","type":"string","nullable":true,"metadata":{}},{"name":"w_warehouse_name","type":"string","nullable":true,"metadata":{}},{"name":"w_warehouse_sq_ft","type":"integer","nullable":true,"metadata":{}},{"name":"w_street_number","type":"string","nullable":true,"metadata":{}},{"name":"w_street_name","type":"string","nullable":true,"metadata":{}},{"name":"w_street_type","type":"string","nullable":true,"metadata":{}},{"name":"w_suite_number","type":"string","nullable":true,"metadata":{}},{"name":"w_city","type":"string","nullable":true,"metadata":{}},{"name":"w_county","type":"string","nullable":true,"metadata":{}},{"name":"w_state","type":"string","nullable":true,"metadata":{}},{"name":"w_zip","type":"string","nullable":true,"metadata":{}},{"name":"w_country","type":"string","nullable":true,"metadata":{}},{"name":"w_gmt_offset","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550896835')
+  'transient_lastDdlTime'='1550896835');
 
 
 CREATE EXTERNAL TABLE web_clickstreams(
@@ -547,17 +458,12 @@ CREATE EXTERNAL TABLE web_clickstreams(
   wcs_item_sk bigint, 
   wcs_web_page_sk bigint, 
   wcs_user_sk bigint)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_clickstreams'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_clickstreams'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
-  'transient_lastDdlTime'='1550897257')
+  'transient_lastDdlTime'='1550897257');
 
 
 CREATE EXTERNAL TABLE web_page(
@@ -575,20 +481,15 @@ CREATE EXTERNAL TABLE web_page(
   wp_link_count int, 
   wp_image_count int, 
   wp_max_ad_count int)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_page'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_page'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"wp_web_page_sk","type":"long","nullable":true,"metadata":{}},{"name":"wp_web_page_id","type":"string","nullable":true,"metadata":{}},{"name":"wp_rec_start_date","type":"string","nullable":true,"metadata":{}},{"name":"wp_rec_end_date","type":"string","nullable":true,"metadata":{}},{"name":"wp_creation_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"wp_access_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"wp_autogen_flag","type":"string","nullable":true,"metadata":{}},{"name":"wp_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"wp_url","type":"string","nullable":true,"metadata":{}},{"name":"wp_type","type":"string","nullable":true,"metadata":{}},{"name":"wp_char_count","type":"integer","nullable":true,"metadata":{}},{"name":"wp_link_count","type":"integer","nullable":true,"metadata":{}},{"name":"wp_image_count","type":"integer","nullable":true,"metadata":{}},{"name":"wp_max_ad_count","type":"integer","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550897264')
+  'transient_lastDdlTime'='1550897264');
 
 
 CREATE EXTERNAL TABLE web_returns(
@@ -616,20 +517,15 @@ CREATE EXTERNAL TABLE web_returns(
   wr_reversed_charge double, 
   wr_account_credit double, 
   wr_net_loss double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_returns'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_returns'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"wr_returned_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_returned_time_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_refunded_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_refunded_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_refunded_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_refunded_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_returning_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_returning_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_returning_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_returning_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_web_page_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_reason_sk","type":"long","nullable":true,"metadata":{}},{"name":"wr_order_number","type":"long","nullable":true,"metadata":{}},{"name":"wr_return_quantity","type":"integer","nullable":true,"metadata":{}},{"name":"wr_return_amt","type":"double","nullable":true,"metadata":{}},{"name":"wr_return_tax","type":"double","nullable":true,"metadata":{}},{"name":"wr_return_amt_inc_tax","type":"double","nullable":true,"metadata":{}},{"name":"wr_fee","type":"double","nullable":true,"metadata":{}},{"name":"wr_return_ship_cost","type":"double","nullable":true,"metadata":{}},{"name":"wr_refunded_cash","type":"double","nullable":true,"metadata":{}},{"name":"wr_reversed_charge","type":"double","nullable":true,"metadata":{}},{"name":"wr_account_credit","type":"double","nullable":true,"metadata":{}},{"name":"wr_net_loss","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550897291')
+  'transient_lastDdlTime'='1550897291');
 
 
 CREATE EXTERNAL TABLE web_sales(
@@ -667,20 +563,15 @@ CREATE EXTERNAL TABLE web_sales(
   ws_net_paid_inc_ship double, 
   ws_net_paid_inc_ship_tax double, 
   ws_net_profit double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_sales'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_sales'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"ws_sold_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_sold_time_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_ship_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_item_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_bill_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_bill_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_bill_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_bill_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_ship_customer_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_ship_cdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_ship_hdemo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_ship_addr_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_web_page_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_web_site_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_ship_mode_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_warehouse_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_promo_sk","type":"long","nullable":true,"metadata":{}},{"name":"ws_order_number","type":"long","nullable":true,"metadata":{}},{"name":"ws_quantity","type":"integer","nullable":true,"metadata":{}},{"name":"ws_wholesale_cost","type":"double","nullable":true,"metadata":{}},{"name":"ws_list_price","type":"double","nullable":true,"metadata":{}},{"name":"ws_sales_price","type":"double","nullable":true,"metadata":{}},{"name":"ws_ext_discount_amt","type":"double","nullable":true,"metadata":{}},{"name":"ws_ext_sales_price","type":"double","nullable":true,"metadata":{}},{"name":"ws_ext_wholesale_cost","type":"double","nullable":true,"metadata":{}},{"name":"ws_ext_list_price","type":"double","nullable":true,"metadata":{}},{"name":"ws_ext_tax","type":"double","nullable":true,"metadata":{}},{"name":"ws_coupon_amt","type":"double","nullable":true,"metadata":{}},{"name":"ws_ext_ship_cost","type":"double","nullable":true,"metadata":{}},{"name":"ws_net_paid","type":"double","nullable":true,"metadata":{}},{"name":"ws_net_paid_inc_tax","type":"double","nullable":true,"metadata":{}},{"name":"ws_net_paid_inc_ship","type":"double","nullable":true,"metadata":{}},{"name":"ws_net_paid_inc_ship_tax","type":"double","nullable":true,"metadata":{}},{"name":"ws_net_profit","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550897720')
+  'transient_lastDdlTime'='1550897720');
 
 
 CREATE EXTERNAL TABLE web_site(
@@ -710,19 +601,14 @@ CREATE EXTERNAL TABLE web_site(
   web_country string, 
   web_gmt_offset double, 
   web_tax_percentage double)
-ROW FORMAT SERDE 
-  'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
 LOCATION
-  's3a://TCPDSPARQ/user/hive/warehouse/parq.db/web_site'
+  's3a://TCPDSCSV3/user/root/benchmarks/bigbench/data/web_site'
 TBLPROPERTIES (
   'STATS_GENERATED_VIA_STATS_TASK'='true', 
   'spark.sql.create.version'='2.2 or prior', 
   'spark.sql.sources.schema.numParts'='1', 
   'spark.sql.sources.schema.part.0'='{"type":"struct","fields":[{"name":"web_site_sk","type":"long","nullable":true,"metadata":{}},{"name":"web_site_id","type":"string","nullable":true,"metadata":{}},{"name":"web_rec_start_date","type":"string","nullable":true,"metadata":{}},{"name":"web_rec_end_date","type":"string","nullable":true,"metadata":{}},{"name":"web_name","type":"string","nullable":true,"metadata":{}},{"name":"web_open_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"web_close_date_sk","type":"long","nullable":true,"metadata":{}},{"name":"web_class","type":"string","nullable":true,"metadata":{}},{"name":"web_manager","type":"string","nullable":true,"metadata":{}},{"name":"web_mkt_id","type":"integer","nullable":true,"metadata":{}},{"name":"web_mkt_class","type":"string","nullable":true,"metadata":{}},{"name":"web_mkt_desc","type":"string","nullable":true,"metadata":{}},{"name":"web_market_manager","type":"string","nullable":true,"metadata":{}},{"name":"web_company_id","type":"integer","nullable":true,"metadata":{}},{"name":"web_company_name","type":"string","nullable":true,"metadata":{}},{"name":"web_street_number","type":"string","nullable":true,"metadata":{}},{"name":"web_street_name","type":"string","nullable":true,"metadata":{}},{"name":"web_street_type","type":"string","nullable":true,"metadata":{}},{"name":"web_suite_number","type":"string","nullable":true,"metadata":{}},{"name":"web_city","type":"string","nullable":true,"metadata":{}},{"name":"web_county","type":"string","nullable":true,"metadata":{}},{"name":"web_state","type":"string","nullable":true,"metadata":{}},{"name":"web_zip","type":"string","nullable":true,"metadata":{}},{"name":"web_country","type":"string","nullable":true,"metadata":{}},{"name":"web_gmt_offset","type":"double","nullable":true,"metadata":{}},{"name":"web_tax_percentage","type":"double","nullable":true,"metadata":{}}]}', 
-  'transient_lastDdlTime'='1550897726')
+  'transient_lastDdlTime'='1550897726');
 
 
