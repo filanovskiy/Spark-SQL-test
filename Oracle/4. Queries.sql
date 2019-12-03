@@ -84,8 +84,8 @@ fetch first 100 rows only;
 	ws_item_sk = i_item_sk
   	and i_category in ('Sports', 'Books', 'Home')
   	and ws_sold_date_sk = d_date_sk
-	and d_date between cast('1999-02-22' as date)
-				and (cast('1999-02-22' as date) + interval '30' day)
+	and to_date(d_date, 'yyyy-mm-dd') between to_date('1999-02-22', 'yyyy-mm-dd')
+				and (to_date('1999-02-22', 'yyyy-mm-dd')) + 30
  group by
 	i_item_id, i_item_desc, i_category, i_class, i_current_price
  order by
@@ -196,8 +196,9 @@ fetch first 100 rows only;
      and i_item_sk          = inv_item_sk
      and inv_warehouse_sk   = w_warehouse_sk
      and inv_date_sk        = d_date_sk
-     and d_date between (cast('2000-03-11' as date) - interval '30' day)
-                    and (cast('2000-03-11' as date) + interval '30' day)
+     and to_date(d_date, 'yyyy-mm-dd') between 
+     to_date('2000-03-11', 'yyyy-mm-dd') - 30
+	 and to_date('2000-03-11', 'yyyy-mm-dd') + 30
    group by w_warehouse_name, i_item_id) x
  where (case when inv_before > 0
              then inv_after / inv_before
@@ -329,14 +330,15 @@ fetch first 100 rows only;
 --q94.sql--
 
  select
-    count(distinct ws_order_number) as `order count`
-   ,sum(ws_ext_ship_cost) as `total shipping cost`
-   ,sum(ws_net_profit) as `total net profit`
+    count(distinct ws_order_number)
+   ,sum(ws_ext_ship_cost) 
+   ,sum(ws_net_profit)
  from
     web_sales ws1, date_dim, customer_address, web_site
  where
-     d_date between cast('1999-02-01' as date) and
-            (cast('1999-02-01' as date) + interval '60' day)
+  to_date(d_date, 'yyyy-mm-dd') between 
+     to_date('1999-02-01', 'yyyy-mm-dd')
+ and to_date('1999-02-01', 'yyyy-mm-dd') + 60
  and ws1.ws_ship_date_sk = d_date_sk
  and ws1.ws_ship_addr_sk = ca_address_sk
  and ca_state = 'IL'
@@ -360,14 +362,15 @@ fetch first 100 rows only;
   where ws1.ws_order_number = ws2.ws_order_number
     and ws1.ws_warehouse_sk <> ws2.ws_warehouse_sk)
  select
-    count(distinct ws_order_number) as `order count`
-   ,sum(ws_ext_ship_cost) as `total shipping cost`
-   ,sum(ws_net_profit) as `total net profit`
+    count(distinct ws_order_number)
+   ,sum(ws_ext_ship_cost)
+   ,sum(ws_net_profit)
  from
     web_sales ws1, date_dim, customer_address, web_site
  where
-     d_date between cast ('1999-02-01' as date) and
-            (cast('1999-02-01' as date) + interval '60' day)
+      to_date(d_date, 'yyyy-mm-dd') between 
+     to_date('1999-02-01', 'yyyy-mm-dd')
+ and to_date('1999-02-01', 'yyyy-mm-dd') + 60
  and ws1.ws_ship_date_sk = d_date_sk
  and ws1.ws_ship_addr_sk = ca_address_sk
  and ca_state = 'IL'
@@ -407,8 +410,9 @@ where
 	ss_item_sk = i_item_sk
   	and i_category in ('Sports', 'Books', 'Home')
   	and ss_sold_date_sk = d_date_sk
-	and d_date between cast('1999-02-22' as date)
-				and (cast('1999-02-22' as date) + interval '30' day)
+    and to_date(d_date, 'yyyy-mm-dd') between 
+     to_date('1999-02-22', 'yyyy-mm-dd') 
+	 and to_date('1999-02-22', 'yyyy-mm-dd') + 30
 group by
 	i_item_id, i_item_desc, i_category, i_class, i_current_price
 order by
@@ -448,3 +452,5 @@ select case when (select count(*) from store_sales
                   where ss_quantity between 81 and 100) end bucket5
 from reason
 where r_reason_sk = 1;
+
+exit;
