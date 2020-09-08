@@ -17,6 +17,7 @@
    AND ctr1.ctr_customer_sk = c_customer_sk
    ORDER BY c_customer_id LIMIT 100
             
+;
 --q11.sql--
 
  with year_total as (
@@ -90,6 +91,7 @@
 t_s_secyear.customer_preferred_cust_flag
  LIMIT 100
             
+;
 --q12.sql--
 
  select i_item_id,
@@ -111,6 +113,7 @@ t_s_secyear.customer_preferred_cust_flag
 	i_category, i_class, i_item_id, i_item_desc, revenueratio
  LIMIT 100
             
+;
 --q13.sql--
 
  select avg(ss_quantity)
@@ -162,6 +165,7 @@ t_s_secyear.customer_preferred_cust_flag
   and ss_net_profit between 50 and 250
      ))
             
+;
 --q19.sql--
 
  select i_brand_id brand_id, i_brand brand, i_manufact_id, i_manufact,
@@ -180,6 +184,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by ext_price desc, brand, brand_id, i_manufact_id, i_manufact
  limit 100
             
+;
 --q21.sql--
 
  select * from(
@@ -205,6 +210,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by w_warehouse_name, i_item_id
  limit 100
             
+;
 --q22.sql--
 
  select i_product_name, i_brand, i_class, i_category, avg(inv_quantity_on_hand) qoh
@@ -217,6 +223,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by qoh, i_product_name, i_brand, i_class, i_category
  limit 100
             
+;
 --q24a.sql--
 
  with ssales as
@@ -239,6 +246,7 @@ t_s_secyear.customer_preferred_cust_flag
  group by c_last_name, c_first_name, s_store_name
  having sum(netpaid) > (select 0.05*avg(netpaid) from ssales)
             
+;
 --q24b.sql--
 
  with ssales as
@@ -261,6 +269,7 @@ t_s_secyear.customer_preferred_cust_flag
  group by c_last_name, c_first_name, s_store_name
  having sum(netpaid) > (select 0.05*avg(netpaid) from ssales)
             
+;
 --q27.sql--
 
  select i_item_id,
@@ -283,6 +292,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by i_item_id, s_state
  limit 100
             
+;
 --q28.sql--
 
  select *
@@ -336,6 +346,7 @@ t_s_secyear.customer_preferred_cust_flag
              or ss_wholesale_cost between 7 and 7+20)) B6
  limit 100
             
+;
 --q3.sql--
 
  SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand,SUM(ss_ext_sales_price) sum_agg
@@ -348,6 +359,7 @@ t_s_secyear.customer_preferred_cust_flag
  ORDER BY dt.d_year, sum_agg desc, brand_id
  LIMIT 100
             
+;
 --q30.sql--
 
  with customer_total_return as
@@ -374,6 +386,7 @@ t_s_secyear.customer_preferred_cust_flag
                   ,c_last_review_date,ctr_total_return
  limit 100
             
+;
 --q31.sql--
 
  with ss as
@@ -421,6 +434,7 @@ t_s_secyear.customer_preferred_cust_flag
        > case when ss2.store_sales > 0 then ss3.store_sales/ss2.store_sales else null end
  order by ss1.ca_county
             
+;
 --q34.sql--
 
  select c_last_name, c_first_name, c_salutation, c_preferred_cust_flag, ss_ticket_number,
@@ -447,6 +461,7 @@ t_s_secyear.customer_preferred_cust_flag
       and cnt between 15 and 20
     order by c_last_name,c_first_name,c_salutation,c_preferred_cust_flag desc, ss_ticket_number
             
+;
 --q36.sql--
 
  select
@@ -473,6 +488,7 @@ t_s_secyear.customer_preferred_cust_flag
   ,rank_within_parent
  limit 100
             
+;
 --q39a.sql--
 
  with inv as
@@ -497,6 +513,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by inv1.w_warehouse_sk,inv1.i_item_sk,inv1.d_moy,inv1.mean,inv1.cov
          ,inv2.d_moy,inv2.mean, inv2.cov
             
+;
 --q39b.sql--
 
  with inv as
@@ -522,6 +539,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by inv1.w_warehouse_sk,inv1.i_item_sk,inv1.d_moy,inv1.mean,inv1.cov
          ,inv2.d_moy,inv2.mean, inv2.cov
             
+;
 --q41.sql--
 
  select distinct(i_product_name)
@@ -574,6 +592,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by i_product_name
  limit 100
             
+;
 --q42.sql--
 
  select dt.d_year, item.i_category_id, item.i_category, sum(ss_ext_sales_price)
@@ -591,6 +610,7 @@ t_s_secyear.customer_preferred_cust_flag
  		,item.i_category
  limit 100
             
+;
 --q43.sql--
 
  select s_store_name, s_store_id,
@@ -611,6 +631,7 @@ t_s_secyear.customer_preferred_cust_flag
           thu_sales,fri_sales,sat_sales
  limit 100
             
+;
 --q44.sql--
 
  select asceding.rnk, i1.i_product_name best_performing, i2.i_product_name worst_performing
@@ -645,6 +666,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by asceding.rnk
  limit 100
             
+;
 --q45.sql--
 
  select ca_zip, ca_city, sum(ws_sales_price)
@@ -665,6 +687,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by ca_zip, ca_city
  limit 100
             
+;
 --q46.sql--
 
  select c_last_name, c_first_name, ca_city, bought_city, ss_ticket_number, amt,profit
@@ -691,6 +714,7 @@ t_s_secyear.customer_preferred_cust_flag
   order by c_last_name, c_first_name, ca_city, bought_city, ss_ticket_number
   limit 100
             
+;
 --q47.sql--
 
  with v1 as(
@@ -740,6 +764,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by sum_sales - avg_monthly_sales, 3
  limit 100
             
+;
 --q48.sql--
 
  select sum (ss_quantity)
@@ -806,6 +831,7 @@ t_s_secyear.customer_preferred_cust_flag
   )
  )
             
+;
 --q50.sql--
 
  select
@@ -838,6 +864,7 @@ t_s_secyear.customer_preferred_cust_flag
      s_suite_number, s_city, s_county, s_state, s_zip
   limit 100
             
+;
 --q51.sql--
 
  WITH web_v1 as (
@@ -877,6 +904,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by item_sk, d_date
  limit 100
             
+;
 --q52.sql--
 
  select dt.d_year
@@ -893,6 +921,7 @@ t_s_secyear.customer_preferred_cust_flag
  order by dt.d_year, ext_price desc, brand_id
 limit 100
             
+;
 --q53.sql--
 
  select * from
@@ -923,6 +952,7 @@ limit 100
  	 i_manufact_id
  limit 100
             
+;
 --q55.sql--
 
 select i_brand_id brand_id, i_brand brand,
@@ -937,6 +967,7 @@ select i_brand_id brand_id, i_brand brand,
  order by ext_price desc, brand_id
  limit 100
             
+;
 --q59.sql--
 
  with wss as
@@ -981,6 +1012,7 @@ select i_brand_id brand_id, i_brand brand,
  order by s_store_name1,s_store_id1,d_week_seq1
  limit 100
             
+;
 --q6.sql--
 
 SELECT state, cnt FROM (
@@ -1002,6 +1034,7 @@ SELECT state, cnt FROM (
 WHERE cnt >= 10
 ORDER BY cnt LIMIT 100
             
+;
 --q61.sql--
 
  select promotions,total,cast(promotions as decimal(15,4))/cast(total as decimal(15,4))*100
@@ -1035,6 +1068,7 @@ ORDER BY cnt LIMIT 100
  order by promotions, total
  limit 100
             
+;
 --q62.sql--
 
  select
@@ -1063,6 +1097,7 @@ ORDER BY cnt LIMIT 100
     substr(w_warehouse_name,1,20), sm_type, web_name
  limit 100
             
+;
 --q63.sql--
 
  select *
@@ -1093,6 +1128,7 @@ ORDER BY cnt LIMIT 100
          ,sum_sales
  limit 100
             
+;
 --q65.sql--
 
  select
@@ -1117,6 +1153,7 @@ ORDER BY cnt LIMIT 100
  order by s_store_name, i_item_desc
  limit 100
             
+;
 --q67.sql--
 
  select * from
@@ -1138,6 +1175,7 @@ ORDER BY cnt LIMIT 100
    d_qoy, d_moy, s_store_id, sumsales, rk
  limit 100
             
+;
 --q68.sql--
 
  select
@@ -1167,6 +1205,7 @@ ORDER BY cnt LIMIT 100
  order by c_last_name, ss_ticket_number
  limit 100
             
+;
 --q7.sql--
 
  SELECT i_item_id,
@@ -1187,6 +1226,7 @@ ORDER BY cnt LIMIT 100
  GROUP BY i_item_id
  ORDER BY i_item_id LIMIT 100
             
+;
 --q70.sql--
 
  select
@@ -1219,6 +1259,7 @@ ORDER BY cnt LIMIT 100
   ,rank_within_parent
  limit 100
             
+;
 --q73.sql--
 
  select
@@ -1242,6 +1283,7 @@ ORDER BY cnt LIMIT 100
       and cnt between 1 and 5
     order by cnt desc, c_last_name asc
 
+;
 --q74.sql--
 
  with year_total as (
@@ -1291,6 +1333,7 @@ ORDER BY cnt LIMIT 100
  order by 1, 1, 1
  limit 100
             
+;
 --q79.sql--
 
  select
@@ -1315,6 +1358,7 @@ ORDER BY cnt LIMIT 100
  order by c_last_name,c_first_name,substr(s_city,1,30), profit
  limit 100
             
+;
 --q8.sql--
 
  select s_store_name, sum(ss_net_profit)
@@ -1399,6 +1443,7 @@ ORDER BY cnt LIMIT 100
  group by s_store_name
  order by s_store_name LIMIT 100
             
+;
 --q82.sql--
 
  select i_item_id, i_item_desc, i_current_price
@@ -1414,6 +1459,7 @@ ORDER BY cnt LIMIT 100
  order by i_item_id
  limit 100
             
+;
 --q84.sql--
 
  select c_customer_id as customer_id
@@ -1435,6 +1481,7 @@ ORDER BY cnt LIMIT 100
  order by c_customer_id
  limit 100
             
+;
 --q85.sql--
 
  select
@@ -1517,6 +1564,7 @@ ORDER BY cnt LIMIT 100
         ,avg(wr_fee)
  limit 100
             
+;
 --q86.sql--
 
  select sum(ws_net_paid) as total_sum, i_category, i_class,
@@ -1538,6 +1586,7 @@ ORDER BY cnt LIMIT 100
    rank_within_parent
  limit 100
             
+;
 --q88.sql--
 
  select  *
@@ -1631,6 +1680,7 @@ ORDER BY cnt LIMIT 100
           (household_demographics.hd_dep_count = 0 and household_demographics.hd_vehicle_count<=0+2))
      and store.s_store_name = 'ese') s8
             
+;
 --q89.sql--
 
  select *
@@ -1657,7 +1707,9 @@ ORDER BY cnt LIMIT 100
  order by sum_sales - avg_monthly_sales, s_store_name
  limit 100
             
+;
 select * from( select i_category, i_class, i_brand,       s_store_name, s_company_name,       d_moy,       sum(ss_sales_price) sum_sales,       avg(sum(ss_sales_price)) over         (partition by i_category, i_brand, s_store_name, s_company_name)         avg_monthly_sales from item, store_sales, date_dim, store where ss_item_sk = i_item_sk and      ss_sold_date_sk = d_date_sk and      ss_store_sk = s_store_sk and      d_year in (1999) and       ((i_category in ('Books','Electronics','Sports') and          i_class in ('computers','stereo','football'))      or (i_category in ('Men','Jewelry','Women') and           i_class in ('shirts','birdal','dresses'))) group by i_category, i_class, i_brand,         s_store_name, s_company_name, d_moy) tmp1 where case when (avg_monthly_sales <> 0) then (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) else null end > 0.1 order by sum_sales - avg_monthly_sales, s_store_name limit 100
+;
 --q9.sql--
 
 select case when (select count(*) from store_sales
@@ -1693,6 +1745,7 @@ select case when (select count(*) from store_sales
 from reason
 where r_reason_sk = 1
             
+;
 --q90.sql--
 
  select cast(amc as decimal(15,4))/cast(pmc as decimal(15,4)) am_pm_ratio
@@ -1715,6 +1768,7 @@ where r_reason_sk = 1
  order by am_pm_ratio
  limit 100
             
+;
 --q92.sql--
 
  select sum(ws_ext_discount_amt) as `Excess Discount Amount`
@@ -1734,6 +1788,7 @@ where r_reason_sk = 1
  order by sum(ws_ext_discount_amt)
  limit 100
             
+;
 --q93.sql--
 
  select ss_customer_sk, sum(act_sales) sumsales
@@ -1750,6 +1805,7 @@ where r_reason_sk = 1
  order by sumsales, ss_customer_sk
  limit 100
             
+;
 --q94.sql--
 
  select
@@ -1776,6 +1832,7 @@ where r_reason_sk = 1
  order by count(distinct ws_order_number)
  limit 100
             
+;
 --q95.sql--
 
  with ws_wh as
@@ -1805,6 +1862,7 @@ where r_reason_sk = 1
  order by count(distinct ws_order_number)
  limit 100
             
+;
 --q96.sql--
 
  select count(*)
@@ -1819,6 +1877,7 @@ where r_reason_sk = 1
  order by count(*)
  limit 100
             
+;
 --q98.sql--
 
 select i_item_desc, i_category, i_class, i_current_price
@@ -1838,6 +1897,7 @@ group by
 order by
 	i_category, i_class, i_item_id, i_item_desc, revenueratio
             
+;
 select
   count(*) as total,
   count(ss_sold_date_sk) as not_null_total,
@@ -1852,3 +1912,4 @@ select
   max(ss_store_sk) as max_ss_store_sk,
   max(ss_promo_sk) as max_ss_promo_sk
 from store_sales
+;
