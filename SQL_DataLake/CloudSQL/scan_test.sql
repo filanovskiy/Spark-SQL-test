@@ -1,2 +1,2 @@
 set timing on
-select * from store_sales where ss_sold_date_sk<0;
+select ss_sold_date_sk from store_sales where ss_sold_date_sk<0;
